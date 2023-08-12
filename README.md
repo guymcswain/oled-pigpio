@@ -1,11 +1,11 @@
 ![‘npm version’](http://img.shields.io/npm/v/oled-js.svg?style=flat) ![‘downloads over month’](http://img.shields.io/npm/dm/oled-js.svg?style=flat)
 
-OLED JS Pi over i2c-bus
+OLED JS Pi over i2c using pigpio
 ========================
 
 ## What is this?
 
-This is fork of package [`oled-js-pi`](https://github.com/kd7yva/oled-js-pi) that works thru `i2c-bus` package and not use package `i2c`.
+This is a fork of a fork ... of package [`oled-js-pi`](https://github.com/kd7yva/oled-js-pi) that works thru pigpio using pigpio-client.
 
 A NodeJS driver for I2C/SPI compatible monochrome OLED screens; to be used on the Raspberry Pi! Works with 128 x 32, 128 x 64 and 96 x 16 sized screens, of the SSD1306/SH1106 OLED/PLED Controller (read the [datasheet here](http://www.adafruit.com/datasheets/SSD1306.pdf)).
 
@@ -15,35 +15,25 @@ OLED screens are really cool - now you can control them with JavaScript!
 
 ## Install
 
-Raspberry Pi allows for software I2C. To enable software I2C, add `dtoverlay=i2c-gpio,bus=3` to `/boot.config.txt`. The software I2C would be available on `bus` no `3` 
-where the `SDA` is on pin `GPIO23`/`BCM 16` and `SCK` is on pun `GPIO24`/`BCM 18`. 
+Download and install the latest version of pigpio on your host rpi:
+```bash
+wget https://github.com/joan2937/pigpio/archive/master.zip
+unzip master.zip
+cd pigpio-master
+make
+sudo make install
 
-If you haven't already, install [NodeJS](http://nodejs.org/).
-
-`npm install oled-i2c-bus`
-
-For `SH1106`, if you get an error:
+# If the Python part of the install fails it may be because you need the setup tools.
+sudo apt install python-setuptools python3-setuptools
 ```
-"Error: , Remote I/O error"
-```
-
-You might have to lower the baudrate by adding the following line to `/boot/config.txt` and rebooting the Pi
-```
-dtparam=i2c_baudrate=10000
-```
-
-This is a known issue with Raspberry Pi as noted in [Raspberry Pi I2C hardware bug](https://github.com/fivdi/i2c-bus/issues/36). Alternatively, use software I2C.
 
 ## I2C screens
 Hook up I2C compatible oled to the Raspberry Pi. Pins: SDA and SCL
 
-### I2C example
+### I2C example - !Work in Progress!
 
 ```javascript
-var i2c = require('i2c-bus');
-var oled = require('oled-i2c-bus');
-
-var opts = {
+const opts = {
   width: 128,
   height: 64,
   address: 0x3D,
@@ -51,8 +41,7 @@ var opts = {
   driver:"SSD1306"
 };
 
-var i2cbus = i2c.openSync(opts.bus)
-var oled = new oled(i2cBus, opts);
+const oled = require('oled-pigpio').oled();
 
 // do cool oled things here
 
