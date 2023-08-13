@@ -28,7 +28,8 @@ sudo apt install python-setuptools python3-setuptools
 ## I2C screens
 Hook up I2C compatible oled to the Raspberry Pi. Pins: SDA and SCL
 
-### I2C example - !Work in Progress!
+### I2C example - mjs, --experimental-specifier=resolution=node
+Clone oled-pigpio repository.
 
 ```javascript
 const opts = {
@@ -39,9 +40,14 @@ const opts = {
   driver:"SSD1306"
 };
 
-const oled = require('oled-pigpio').oled();
+import oled from './oled';
+import i2c from './i2c-bus';
 
-// do cool oled things here
+await i2c.ready;
+const i2cBus = i2c.openSync(opts);
+const display = new oled(ic2Bus, opts);
+
+// do cool oled things with display here
 
 ```
 
