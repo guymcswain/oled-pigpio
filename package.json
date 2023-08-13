@@ -1,20 +1,16 @@
 {
-  "name": "oled-rpi-i2c-bus",
-  "version": "1.1.4",
-  "description": "NodeJS module for controlling oled devices on the Raspbery Pi (including the SSD1306 and SH1106 OLED screens)",
+  "name": "oled-pigpio",
+  "version": "0.1.0",
+  "description": "A derivative fork of 'oled-js-pi' but using pigpio for i2c bus.  SSD1306 and SH1106 devices are supported.",
   "main": "oled.js",
   "devDependencies": {
-    "oled-font-pack": "^1.0.1",
-    "png-to-lcd": "~1.0.2",
-    "pngparse": "~2.0.1",
-    "temporal": "^0.3.8"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --experimental-specifier-resolution=node ./examples/ssd1306_text.mjs"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hadifikri/oled-rpi-i2c-bus.git"
+    "url": "https://github.com/guymcswain/oled-pigpio.git"
   },
   "keywords": [
     "Raspbery Pi",
@@ -22,21 +18,22 @@
     "NodeJS",
     "oled",
     "SSD1306",
-    "128x64"
+    "PiOLED"
   ],
   "author": [
     "Judd Flamm",
     "Suz Hinton",
     "Bogdan Symchych",
-    "Abdul Hadi Fikri"
+    "Abdul Hadi Fikri",
+    "Guy McSwain"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hadifikri/oled-rpi-i2c-bus/issues"
+    "url": "https://github.com/guymcswain/oled-pigpio/issues"
   },
-  "homepage": "https://github.com/hadifikri/oled-rpi-i2c-bus",
+  "homepage": "https://github.com/guymcswain/oled-pigpio",
   "dependencies": {
-    "i2c-bus": "^5.2.2",
+    "pigpio-client": "https://github.com/guymcswain/pigpio-client.git",
     "pngjs": "^3.3.3"
   }
 }
